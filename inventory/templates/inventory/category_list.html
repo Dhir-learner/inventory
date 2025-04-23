@@ -1,0 +1,44 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+<div class="row mb-3">
+    <div class="col">
+        <h2>Categories</h2>
+    </div>
+    <div class="col text-end">
+        <a href="{% url 'category_create' %}" class="btn btn-primary">Add New Category</a>
+    </div>
+</div>
+
+{% if categories %}
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categories %}
+            <tr>
+                <td>{{ category.name }}</td>
+                <td>{{ category.description|truncatechars:50 }}</td>
+                <td>
+                    <a href="{% url 'category_update' category.id %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                    <a href="{% url 'category_delete' category.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="alert alert-info">
+    No categories available. <a href="{% url 'category_create' %}">Add one now</a>.
+</div>
+{% endif %}
+{% endblock %}

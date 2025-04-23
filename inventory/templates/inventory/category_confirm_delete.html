@@ -1,0 +1,22 @@
+{% extends 'inventory/base.html' %}
+
+{% block title %}Delete Category{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Delete Category</h2>
+    </div>
+    <div class="card-body">
+        <p class="alert alert-danger">Are you sure you want to delete the category "{{ category.name }}"?</p>
+        <p class="alert alert-warning">This will also delete all products in this category!</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="{% url 'category_list' %}" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-danger">Confirm Delete</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
